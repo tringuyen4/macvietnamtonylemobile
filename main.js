@@ -409,6 +409,33 @@ app.post('/deletechip/', function (req, res) {
          res.end(JSON.stringify(results.rows));
      });
  });
+ 
+
+app.post('/khohang/', function (req, res) {
+    var postData = req.body;
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+
+    pool.query('INSERT INTO khohang VALUES ($1)', postData, function (error, results, fields) {
+        if (error) throw error;
+        res.end(JSON.stringify(results.rows));
+    });
+});
+
+app.post('/deletekhohang/', function (req, res) {
+     var postData = req.body;
+     res.header("Access-Control-Allow-Origin", "*");
+     res.header("Access-Control-Allow-Credentials", true);
+     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+     res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+
+     pool.query('DELETE FROM khohang where khohang=($1)', postData, function (error, results, fields) {
+         if (error) throw error;
+         res.end(JSON.stringify(results.rows));
+     });
+ });
 
  app.post('/ram/', function (req, res) {
     var postData = req.body;
@@ -600,6 +627,19 @@ app.get('/getquanlymay/', function (req, res) {
     res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json");
     console.log(req);
     pool.query('select * from quanlymay', function (error, results, fields) {
+        if (error) throw error;
+        res.end(JSON.stringify(results.rows));
+    });
+
+    
+app.get('/getkhohang/', function (req, res) {
+    
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json");
+    console.log(req);
+    pool.query('select * from khohang', function (error, results, fields) {
         if (error) throw error;
         res.end(JSON.stringify(results.rows));
     });
