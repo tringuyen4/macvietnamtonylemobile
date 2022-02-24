@@ -630,7 +630,7 @@ app.get('/getquanlymay/', function (req, res) {
         if (error) throw error;
         res.end(JSON.stringify(results.rows));
     });
-
+});
     
 app.get('/getkhohang/', function (req, res) {
     
